@@ -10,6 +10,7 @@ from models import storage
 from api.v1.views import app_views
 from flask import make_response, jsonify, abort, request
 
+
 @app_views.route('/places/<place_id>/reviews',
                  methods=['GET'], strict_slashes=False)
 def retrieve_reviews(place_id):
@@ -23,6 +24,7 @@ def retrieve_reviews(place_id):
     for review in place.reviews:
         reviews.append(review.to_dict())
     return jsonify(reviews)
+
 
 @app_views.route('/reviews/<review_id>', methods=['GET'], strict_slashes=False)
 def retrieve_review(review_id):
@@ -46,6 +48,7 @@ def delete_review(review_id):
     review.delete()
     storage.save()
     return make_response(jsonify({}), 200)
+
 
 @app_views.route('/places/<place_id>/reviews',
                  methods=['POST'], strict_slashes=False)
