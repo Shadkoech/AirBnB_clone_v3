@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""views module Init file"""
 from api.v1.views.index import *
 from flask import Blueprint
 
