@@ -56,14 +56,14 @@ def create_state():
     if 'name' not in data:
         abort(400, description="Missing name")
 
-    state = state(**data)
+    state = State(**data)
     storage.new(state)
     storage.save()
     return make_response(jsonify(state.to_dict()), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
-def update_state():
+def update_state(state_id):
     """ Updates an existing state using HTTP method 'PUT'
     """
     state = storage.get(State, state_id)
