@@ -1,19 +1,24 @@
 #!/usr/bin/python3
-"""Index file"""
+"""Module for defining the routes related to
+the status of the API"""
+
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
 
 
-@app_views.route('/status', methods=['GET'], strict_slashes=False)
+@app_views.route('/status', methods=['GET'])
 def status():
-    """Returns JSON"""
+    """Route handler for the API
+    Returns a JSON response with key "status set to OK"
+    """
     return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
-def stats():
-    """Returns number of each instance type"""
+def number_ofObjects():
+    """Retrieves the number of each object type
+    returns key-value pairs where value is the number of objects"""
     return jsonify(amenities=storage.count("Amenity"),
                    cities=storage.count("City"),
                    places=storage.count("Place"),
