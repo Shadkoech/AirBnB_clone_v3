@@ -27,7 +27,7 @@ def retrieve_state(state_id):
     """
     state = storage.get("State", state_id)
     if not state:
-        abort (404)
+        abort(404)
 
     return jsonify(state.to_dict())
 
@@ -59,7 +59,7 @@ def create_state():
     state = state(**data)
     storage.new(state)
     storage.save()
-    return jsonify(state.to_dict()), 201
+    return make_response(jsonify(state.to_dict()), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
@@ -77,4 +77,4 @@ def update_state():
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(state, key, value)
     storage.save()
-    return jsonify(state.to_dict()), 200
+    return make_response(jsonify(state.to_dict()), 200)
